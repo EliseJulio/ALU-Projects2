@@ -1,14 +1,7 @@
-require('dotenv').config();
-const apikey = process.env.API_KEY;
-
-import config from './keylock.json' assert { type: 'json' };
-const apiKey = config.API_KEY;
-
 function searchByCity() {
     const place = document.getElementById("input").value;
-    const urlsearch = `http://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${apiKey}`;
 
-    fetch(urlsearch)
+    fetch(`/weather?city=${place}`)
         .then((res) => {
             if (!res.ok) {
                 throw new Error("City not found");
@@ -25,11 +18,8 @@ function searchByCity() {
 
     document.getElementById("input").value = "";
 }
-
 function weatherReport(data) {
-    const urlcast = `http://api.openweathermap.org/data/2.5/forecast?q=${data.name}&appid=${apikey}`;
-
-    fetch(urlcast)
+    fetch(`/forecast?city=${data.name}`)
         .then((res) => {
             if (!res.ok) {
                 throw new Error("Failed to fetch forecast data");
@@ -37,7 +27,6 @@ function weatherReport(data) {
             return res.json();
         })
         .then((forecast) => {
-            console.log(forecast.city);
             hourForecast(forecast);
             dayForecast(forecast);
 
