@@ -25,6 +25,13 @@ body {
     align-items: center;
 }
 
+.header #error {
+    display: none;
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
 .header h1 {
     color: rgb(0, 0, 0);
     text-decoration: underline;
