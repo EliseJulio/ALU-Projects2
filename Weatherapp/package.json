@@ -1,11 +1,11 @@
 {
   "dependencies": {
+    "axios": "^1.7.8",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "node-fetch": "^3.3.2"
   },
   "name": "weatherapp",
-  "type": "module",
   "version": "1.0.0",
   "description": "Part 1 \r Real Time Weather App",
   "main": "script.js",

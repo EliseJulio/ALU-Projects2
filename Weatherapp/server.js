@@ -1,14 +1,18 @@
-require('dotenv').config();
+require('dotenv').config(); 
 const express = require('express');
 const axios = require('axios');
 const app = express();
 const port = process.env.PORT || 5000;
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.OPENWEATHERMAP_API_KEY; 
+
+if (!API_KEY) {
+    console.error('Error: Missing OPENWEATHERMAP_API_KEY in .env file');
+    process.exit(1); 
+}
 
 app.use(express.json());
-
-app.use(express.static('public'));
+app.use(express.static('public')); 
 
 // Endpoint to fetch weather data by city
 app.get('/weather', async (req, res) => {
@@ -19,14 +23,15 @@ app.get('/weather', async (req, res) => {
     }
 
     const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+
     try {
         const response = await axios.get(weatherUrl);
         res.json(response.data);
     } catch (error) {
         if (error.response && error.response.status === 404) {
-            res.status(404).json({ error: 'City not found' });
+            return res.status(404).json({ error: 'City not found' });
         } else {
-            console.error(error);
+            console.error('Error fetching weather data:', error);
             res.status(500).json({ error: 'Failed to fetch weather data' });
         }
     }
@@ -41,14 +46,15 @@ app.get('/forecast', async (req, res) => {
     }
 
     const forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`;
+
     try {
         const response = await axios.get(forecastUrl);
         res.json(response.data);
     } catch (error) {
         if (error.response && error.response.status === 404) {
-            res.status(404).json({ error: 'City not found' });
+            return res.status(404).json({ error: 'City not found' });
         } else {
-            console.error(error);
+            console.error('Error fetching forecast data:', error);
             res.status(500).json({ error: 'Failed to fetch forecast data' });
         }
     }
@@ -56,5 +62,5 @@ app.get('/forecast', async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(Server is running on http://localhost:${port});
 });

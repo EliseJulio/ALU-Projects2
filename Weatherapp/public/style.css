@@ -13,7 +13,7 @@ body {
     padding: 1rem 5rem;
     text-transform: capitalize;
     font-family: 'Times New Roman', Times, serif;
-    background: linear-gradient(45deg, rgba(99, 52, 52, 0.717), rgba(7, 43, 127, 0.679)), url('./background.jpg');
+    background: url('./background.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
