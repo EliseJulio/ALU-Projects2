@@ -12,7 +12,7 @@ function searchByCity() {
             weatherReport(data);
         })
         .catch((error) => {
-            showError("City not found. Please enter a valid city name.");
+            showError("City not found. Please enter a valid city or country name.");
             console.error(error);
         });
 
